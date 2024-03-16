@@ -20,7 +20,7 @@ A burst of RAW images are processed in the following order.
 
 3) Calculating robustness mask --- mask that is used to mask unreliable pixels so that they are not used in merging
 
-4) Merging all frames into one using all obtained information
+4) Merging all frames into one using all obtained information and postprocessing.
 
 *Output*: one RGB denoised image with x2 higher resolution
 
