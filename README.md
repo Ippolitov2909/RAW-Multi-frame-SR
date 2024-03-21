@@ -9,7 +9,7 @@ Example of image refinement (from single image demosaicing to the result of the 
 </p>
 
 <p align="center">
-  <img src="https://github.com/Ippolitov2909/RAW-Multi-frame-SR/blob/main/illustrations/window.gif" width="600" align="middle"/>
+  <img src="https://github.com/Ippolitov2909/RAW-Multi-frame-SR/blob/main/illustrations/illustration.gif" width="600" align="middle"/>
 </p>
 
 ## Pipeline
