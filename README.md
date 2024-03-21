@@ -5,9 +5,11 @@ This repository contains my own implementation of image processing pipeline that
 Most of implemented code is inspired by Google's paper ["Handheld multi-frame super-resolution"](https://sites.google.com/view/handheld-super-res/): 
 
 <p align="center">
-  <img src="https://github.com/Ippolitov2909/RAW-Multi-frame-SR/blob/main/examples/orig_piece.png" width="300" align="middle"/>
-  <img src="https://media.istockphoto.com/id/1093587922/vector/arrow-line-vector-icon-on-white-background.jpg?s=612x612&w=0&k=20&c=oMajz7P9e9tqTxW4aFjTAejxuydaQ9nHdPo6Ht5B69E=" width="200" align="middle"/>
-  <img src="https://github.com/Ippolitov2909/RAW-Multi-frame-SR/blob/main/examples/merged_piece.png" width="300" align="middle" /> 
+Example of image refinement (from single image demosaicing to the result of the algorithm)
+</p>
+
+<p align="center">
+  <img src="https://github.com/Ippolitov2909/RAW-Multi-frame-SR/blob/main/illustrations/window.gif" width="600" align="middle"/>
 </p>
 
 ## Pipeline
@@ -33,3 +35,8 @@ Repository contains 6 jupyter notebooks. Each of them has examples of running my
 * Robustness.ipynb --- how to estimate robustness mask
 * Merging.ipynb --- how to merge all RAW frames into one on original resolution
 * Superresolution.ipynb --- how to merge all RAW frames into one on x2 resolution
+
+## Prerequisites
+* Python, jupyter
+* Numpy, scipy, skimage, cv2, time, rawpy, pathlib
+* (packages for visualization) Matplotlib, flow-vis
