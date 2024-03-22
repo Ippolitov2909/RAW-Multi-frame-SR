@@ -26,6 +26,11 @@ A burst of RAW images are processed in the following order.
 
 *Output*: one RGB denoised image with x2 higher resolution
 
+<p align="center">
+  Scheme of the pipeline (taken from [Google's paper](https://sites.google.com/view/handheld-super-res/))
+  <img src="https://github.com/Ippolitov2909/RAW-Multi-frame-SR/blob/main/illustrations/scheme.jpg" width="800">
+</p>
+
 ## Usage
 Repository contains 6 jupyter notebooks. Each of them has examples of running my code
 
