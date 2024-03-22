@@ -1,7 +1,7 @@
 import time
 import numpy as np 
-
-from alignment import OpticalFlowProcessor
+from src.alignment.alignment import OpticalFlowProcessor
+# from alignment import OpticalFlowProcessor
 from kernel_regressor import KernelRegressor
 from robustness import RobustnessProcessor
 from merge import MergeProcessor

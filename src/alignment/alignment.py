@@ -1,4 +1,4 @@
-from alignment_utils import calc_d2, downsample, extract
+from src.alignment.alignment_utils import calc_d2, downsample, extract
 import cv2
 import time
 import skimage
