@@ -2,11 +2,11 @@ import time
 import numpy as np 
 from src.alignment.alignment import OpticalFlowProcessor
 # from alignment import OpticalFlowProcessor
-from kernel_regressor import KernelRegressor
-from robustness import RobustnessProcessor
-from merge import MergeProcessor
-from utils import upsample_weights
-from raw_utils import make_sparse_raw
+from src.kernel_regression.kernel_regressor import KernelRegressor
+from src.robustness import RobustnessProcessor
+from src.merge import MergeProcessor
+from src.utils.utils import upsample_weights
+from src.utils.raw_utils import make_sparse_raw
 
 class SuperResolutionProcessor:
     def __init__(
@@ -46,7 +46,8 @@ class SuperResolutionProcessor:
         imgs,
         raw_imgs,
         resolution: int = 2,
-        better_lk_needed=False
+        better_lk_needed=False,
+        verbose=False
     ):
         """
 
@@ -57,14 +58,19 @@ class SuperResolutionProcessor:
 
         :return: merged frame
         """
+        start_time = time.time()
         img_indices = range(len(imgs))
         base_index = 0
-        lowres_flows = self.opt_flow_processor.process_alignment(imgs, img_indices, base_index=base_index, better_lk_needed=False,
-                                                depth=3)
+        lowres_flows = self.opt_flow_processor.process_alignment(imgs, base_index=base_index, better_lk_needed=False)
+        if verbose:
+            print("Optical flow took {} seconds".format(time.time() - start_time))
         lowres_kernels = self.kernel_regressor.process_burst(
             imgs, lowres_flows,
-            silent=False
+            silent=not verbose
         )
+
+        if verbose:
+            print("Kernel regression took {} seconds".format(time.time() - start_time))
         start_time = time.time()
         rob_masks = [self.robustness_processor.get_robustness_mask(imgs[0].astype(float) / 255,
                                                     img.astype(float) / 255,
@@ -76,7 +82,7 @@ class SuperResolutionProcessor:
         flows = np.array(flows)
         flows *= 2
 
-        merged = self.merge_processor.merge(raw_imgs, np.array(flows), np.array(kernels), masks)
+        merged = self.merge_processor.merge(raw_imgs, np.array(flows), np.array(kernels), masks, verbose=verbose)
 
         if resolution == 1:
             return merged
@@ -85,8 +91,11 @@ class SuperResolutionProcessor:
 
         kernels = self.kernel_regressor.process_burst(
             [merged, *imgs[1:]], flows,
-            silent=False,
+            silent=not verbose,
         )
+
+        if verbose:
+            print("Kernel regression took {} seconds".format(time.time() - start_time))
 
         flows_2x = [upsample_weights(flow, channel=0) for flow in flows]
         kernels_2x = [upsample_weights(kernels[i], channel=-1) for i in range(len(kernels))]
@@ -100,6 +109,3 @@ class SuperResolutionProcessor:
 
         if resolution == 2:
             return merged_2x
-
-
-    

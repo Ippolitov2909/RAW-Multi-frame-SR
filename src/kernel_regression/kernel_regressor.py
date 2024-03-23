@@ -1,11 +1,11 @@
 import time
 import numpy as np
 
-from kernel_constrcutor import KernelConstructor
+from src.kernel_regression.kernel_constructor import KernelConstructor
 from scipy.signal import convolve2d
 from skimage.color import rgb2gray
 
-from kernel_regression_utils import get_gauss_deriv, get_gauss_fixed_size
+from src.kernel_regression.kernel_regression_utils import get_gauss_deriv, get_gauss_fixed_size
 
 
 
